@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Copilot Notebooks | ACE Team</title>
+<meta name="description" content="Discover Copilot Notebooks, learn how to use your own references, and choose the guidebook or the knowledge game.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Caveat:wght@600&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F8FC; --grid:#DCE8F3; --ink:#16254A; --ink2:#4B5B7F; --card:#FFFFFF; --line:#16254A;
+  --accent:#F28500; --accent-ink:#16254A; --accent-t:#B85600; --hi:#FFD2A1; --tip:#E3F6EC; --tip-b:#14885F;
+  --font-head:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+  --font-hand:"Caveat","Segoe Print","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme: dark){
+  :root{--paper:#0D1A33; --grid:#1A2F55; --ink:#EAF0FF; --ink2:#A3B3D6; --card:#13264A; --line:#7F93C4; --accent:#FF9A2E; --accent-ink:#0D1A33; --accent-t:#FFB45C; --hi:#FFB04D; --tip:#143A2E; --tip-b:#3CCB93}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0; min-height:100vh; background:var(--paper); color:var(--ink); font-family:var(--font-body); font-size:18px; line-height:1.55;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px); background-size:28px 28px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent); outline-offset:4px}
+.skip{position:absolute; left:-999px; top:8px; z-index:10; padding:8px 14px; background:var(--card); border:3px solid var(--line); border-radius:10px}
+.skip:focus{left:8px}
+.shell{width:min(1120px,calc(100% - 36px)); margin-inline:auto}
+.top{display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:76px; margin-top:10px; padding:10px 16px; background:var(--card); border:3px solid var(--line); border-radius:14px; box-shadow:4px 4px 0 var(--line)}
+.logo{font-family:"Montserrat","Arial Black",system-ui,sans-serif; font-weight:800; color:#F28500; letter-spacing:0; line-height:1; white-space:nowrap; font-size:22px}
+.top-label{padding-left:14px; margin-left:14px; border-left:3px solid var(--line); font-family:var(--font-head); font-weight:800; font-size:17px}
+.brand{display:flex; align-items:center; min-width:0}
+.top-note{color:var(--ink2); font-size:15px; text-align:right}
+.hero{text-align:center; padding:60px 0 28px}
+.eyebrow{display:inline-flex; align-items:center; gap:9px; padding:5px 12px; border:2px solid var(--line); border-radius:999px; background:var(--hi); color:#16254A; font-weight:700; font-size:15px}
+.eyebrow::before{content:""; width:9px; height:9px; background:var(--tip-b); border:2px solid var(--line); border-radius:50%}
+h1,h2,h3{font-family:var(--font-head); line-height:1.08; margin:0}
+h1{max-width:850px; margin:18px auto 0; font-size:58px; font-weight:800}
+h1 em{font-style:normal; color:var(--accent-t)}
+.lede{max-width:760px; margin:18px auto 0; color:var(--ink2); font-size:20px; line-height:1.55}
+.preview{margin:34px 0 0; overflow:hidden; border:3px solid var(--line); border-radius:16px; background:var(--card); box-shadow:7px 7px 0 var(--line)}
+.preview img{display:block; width:100%; height:auto; aspect-ratio:1200 / 450; object-fit:cover; object-position:center}
+.preview figcaption{padding:8px 14px; border-top:2px solid var(--line); color:var(--ink2); font-size:14px; text-align:left}
+.learn{padding:28px 0 40px}
+.section-head{display:flex; align-items:baseline; justify-content:space-between; gap:20px; margin-bottom:14px}
+.section-head h2{font-size:30px}
+.section-head p{margin:0; color:var(--ink2); font-size:16px}
+.flow{display:grid; grid-template-columns:repeat(3,1fr); margin:0; padding:0; list-style:none; background:var(--card); border:3px solid var(--line); border-radius:14px; box-shadow:4px 4px 0 var(--line)}
+.flow li{display:flex; align-items:flex-start; gap:12px; min-height:90px; padding:18px}
+.flow li+li{border-left:2px solid var(--grid)}
+.flow b{display:grid; flex:none; place-items:center; width:32px; height:32px; border:2px solid var(--line); border-radius:50%; background:var(--hi); color:#16254A; font-family:var(--font-head); font-size:16px}
+.flow strong{display:block; font-family:var(--font-head); font-size:18px}
+.flow span{display:block; color:var(--ink2); font-size:15px; line-height:1.4}
+.paths{padding:14px 0 58px}
+.paths .section-head{align-items:flex-end; margin-bottom:18px}
+.kicker{display:block; margin-bottom:5px; color:var(--accent-t); font-family:var(--font-hand); font-size:24px; line-height:1}
+.paths h2{font-size:34px}
+.choices{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px}
+.choice{display:flex; flex-direction:column; align-items:flex-start; min-height:245px; padding:24px; background:var(--card); border:3px solid var(--line); border-radius:16px; box-shadow:5px 5px 0 var(--line); transition:transform .14s,box-shadow .14s}
+.choice:hover{transform:translate(-2px,-2px); box-shadow:7px 7px 0 var(--line)}
+.choice.game{background:color-mix(in srgb,var(--hi) 35%,var(--card))}
+.choice-mark{display:grid; place-items:center; width:42px; height:42px; margin-bottom:16px; border:2px solid var(--line); border-radius:12px; background:var(--hi); color:#16254A; font-family:var(--font-head); font-size:20px; font-weight:800}
+.choice h3{font-size:27px}
+.choice p{max-width:46ch; margin:8px 0 20px; color:var(--ink2); font-size:17px}
+.btn{display:inline-block; margin-top:auto; padding:10px 16px; background:var(--accent); color:var(--accent-ink); border:3px solid var(--line); border-radius:10px; box-shadow:3px 3px 0 var(--line); font-weight:700; text-decoration:none; transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--line)}
+footer{display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 0 28px; border-top:2px solid var(--grid); color:var(--ink2); font-size:14px}
+footer .logo{font-size:18px}
+@media(max-width:700px){
+  .top{min-height:66px; padding:8px 12px}
+  .top-label{font-size:14px; padding-left:10px; margin-left:10px}
+  .top-note{max-width:100px; font-size:13px; line-height:1.3}
+  .hero{padding-top:44px}
+  h1{font-size:42px}
+  .lede{font-size:18px}
+  .section-head{display:block}
+  .section-head p{margin-top:5px}
+  .flow{grid-template-columns:1fr}
+  .flow li{min-height:0; padding:14px 16px}
+  .flow li+li{border-left:0; border-top:2px solid var(--grid)}
+  .choices{grid-template-columns:1fr}
+  .choice{min-height:220px}
+  footer{align-items:flex-start; flex-direction:column}
+}
+@media(max-width:390px){
+  .shell{width:calc(100% - 24px)}
+  .logo{font-size:18px}
+  .top-label{font-size:12px; padding-left:8px; margin-left:8px}
+  .top-note{font-size:12px; max-width:84px}
+  h1{font-size:36px}
+  .preview img{aspect-ratio:4 / 3; object-fit:cover; object-position:left center}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top shell">
+  <div class="brand"><span class="logo">ACE Team</span><span class="top-label">Copilot Notebooks</span></div>
+  <span class="top-note">Learn it, then try it</span>
+</header>
+<main id="main" class="shell">
+  <section class="hero" aria-labelledby="page-title">
+    <span class="eyebrow">Meet your new study buddy</span>
+    <h1 id="page-title">Copilot + Notebooks<br>Learn Better Smarter</h1>
+    <p class="lede">Drowning in documents before a test or project? Copilot Notebooks brings the sources you choose into one focused space, so you can ask questions, understand key ideas, and turn what matters into study guides, summaries, and more.</p>
+  </section>
+
+  <section class="learn" aria-labelledby="learn-title">
+    <div class="section-head">
+      <h2 id="learn-title">Enhance learning in three steps</h2>
+      <p>Turn the materials you already use into engaging study aids.</p>
+    </div>
+    <ol class="flow">
+      <li><b>1</b><span><strong>Import your files</strong>Bring notes, readings, and other useful sources into a notebook.</span></li>
+      <li><b>2</b><span><strong>Generate study materials</strong>Create an infographic or study guide from your references.</span></li>
+      <li><b>3</b><span><strong>Learn with ease</strong>Review at your pace, then reinforce what you learned with the guidebook or game.</span></li>
+    </ol>
+  </section>
+
+  <section class="paths" aria-labelledby="paths-title">
+    <div class="section-head">
+      <div><span class="kicker">Choose your next step</span><h2 id="paths-title">Learn or play</h2></div>
+      <p>Start with the walkthrough or jump into a quick challenge.</p>
+    </div>
+    <div class="choices">
+      <article class="choice">
+        <span class="choice-mark" aria-hidden="true">01</span>
+        <h3>Read the guidebook</h3>
+        <p>Follow the notebook workflow with clear steps, screenshots, and practical tips.</p>
+        <a class="btn" href="copilot%20notebook%20guide/">Open the guidebook</a>
+      </article>
+      <article class="choice game">
+        <span class="choice-mark" aria-hidden="true">02</span>
+        <h3>Play the knowledge game</h3>
+        <p>Put your Copilot Notebooks knowledge to the test in a short 3D adventure.</p>
+        <a class="btn" href="copilot%20quiz%20game/">Play the game</a>
+      </article>
+    </div>
+  </section>
+</main>
+<footer class="shell">
+  <span class="logo">ACE Team</span>
+  <span>&copy; 2026 ACE Team. All rights reserved.</span>
+</footer>
+</body>
+</html>
